@@ -17,8 +17,12 @@
                     <p>{{$ciggy->price}}</p>
                 </div>
 
+                <a href="{{ route('ciggies.edit', $ciggy) }}" class="btn-link ml-auto">Edit</a>
 
-    </div>
+                <form action="{{ route('ciggies.destroy', $ciggy) }}" method="post">
+                    @method('delete')
+                    @csrf
+    </div><button type="submit" class="btn btn-danger ml-4" onclick="return confirm('Are you sure you want to delete?')">Delete </button>
          </div>
             </div>
 
