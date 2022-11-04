@@ -17,7 +17,10 @@ class CiggyFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'brand' => $this->faker->word,
+            'type' => $this->faker->text(50),
+            'price' => $this->faker->decimal(10),
+            'amount' => $this->faker->name
         ];
     }
 }

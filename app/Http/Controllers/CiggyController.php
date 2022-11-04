@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ciggy;
 use Illuminate\Http\Request;
 
 class CiggyController extends Controller
@@ -13,7 +14,8 @@ class CiggyController extends Controller
      */
     public function index()
     {
-        return view('ciggies.index');
+        $ciggies = Ciggy::paginate(10);
+        return view('ciggies.index')->with('ciggies', $ciggies);
     }
 
     /**V
@@ -23,7 +25,7 @@ class CiggyController extends Controller
      */
     public function create()
     {
-        //
+        return view( 'ciggies.create');
     }
 
     /**
@@ -34,7 +36,17 @@ class CiggyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        Ciggy::create([
+            // Ensure you have the use statement for
+            // Illuminate\Support\Str at the top of this file.
+        //    'user_id' => Auth::id(),
+            'brand' =>  $request->brand,
+            'type' =>  $request->type,
+            'price' =>  $request->price,
+            'amount' =>  $request->amount
+        ]);
+        return to_route('ciggies.index');
     }
 
     /**
@@ -45,7 +57,8 @@ class CiggyController extends Controller
      */
     public function show($id)
     {
-        //
+        $ciggy = Ciggy::findOrFail($id);
+        return view('ciggies.show')->with('ciggy', $ciggy);
     }
 
     /**

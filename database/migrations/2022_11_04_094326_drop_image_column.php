@@ -13,14 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ciggies', function (Blueprint $table) {
-            $table->id();
-            $table->string('brand');
-            $table->string('type');
-            $table->decimal('price');
-            $table->bigInteger('amount');
-           // $table->string('Ciggy_image');
-            $table->timestamps();
+        Schema::table('ciggies', function (Blueprint $table) {
+            $table->dropColumn('Ciggy_image');
         });
     }
 
@@ -31,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ciggies');
+        Schema::table('ciggies', function (Blueprint $table) {
+            $table->string('Ciggy_image');
+        });
     }
 };
