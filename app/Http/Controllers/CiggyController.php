@@ -14,6 +14,7 @@ class CiggyController extends Controller
      */
     public function index()
     {
+        //fetch 10 ciggies from the databse .
         $ciggies = Ciggy::paginate(10);
         return view('ciggies.index')->with('ciggies', $ciggies);
     }
@@ -36,6 +37,13 @@ class CiggyController extends Controller
      */
     public function store(Request $request)
     {
+        // validation for  store
+        $request->validate([
+            'brand' => 'required',
+            'type' => 'required',
+            'price' => 'required|max:500',
+            'amount' =>'required',
+         ]);
 
         Ciggy::create([
             // Ensure you have the use statement for
@@ -48,7 +56,7 @@ class CiggyController extends Controller
         ]);
         return to_route('ciggies.index');
     }
-
+    // Store a newly created resource in storage.
     /**
      * Display the specified resource.
      *
@@ -57,6 +65,11 @@ class CiggyController extends Controller
      */
     public function show($id)
     {
+      //validation for show
+        // if(!Auth::id()) {
+           // return abort(403);
+        //  }
+
         $ciggy = Ciggy::findOrFail($id);
         return view('ciggies.show')->with('ciggy', $ciggy);
     }
@@ -83,6 +96,14 @@ class CiggyController extends Controller
      */
     public function update(Request $request, Ciggy $ciggy)
     {
+       //validation for the edit feild
+        $request->validate([
+            'brand' => 'required',
+            'type' => 'required',
+            'price' => 'required',
+            'amount' =>'required',
+            ]);
+
         $ciggy->update([
         'brand' =>  $request->brand,
         'type' =>  $request->type,

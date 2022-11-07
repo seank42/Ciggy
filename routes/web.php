@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return redirect('/../ciggies');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('/ciggies', CiggyController::class)->middleware(['auth']);
