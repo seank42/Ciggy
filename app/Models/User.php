@@ -41,4 +41,38 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //this function allows you to do $role->users which will return all users for that role
+    public function users()
+        {
+            return $this->belongsToMany('App\Models\User','user_role');
+        }
+    // this function allows you do $user->roles which will return all the roles for that user
+        public function roles()
+        {
+            return $this->belongsToMany('App\Models\Role','user_role');
+        }
+
+    public function authorizeRoles($roles)
+        {
+            if(is_array($roles)){
+                return $this->hasAnyRole($roles) ||
+            abort(401, 'This action is unauthorzed');
+            }
+            return $this->hasRole($roles) ||
+            abort(401,'This action is unathorized');
+        }
+
+
+    public function hasRole($roles)
+        {
+            return null !== $this->roles()->where('name',$roles)->first();
+        }
+
+    public function hasAnyRole($roles)
+        {
+            return null !== $this->roles()->whereIn('name',$roles)->first();
+        }
+
 }
+

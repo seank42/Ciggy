@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\CiggyController;
+use App\Http\Controllers\CiggyController as AdminCiggyController;
+use App\Http\Controllers\User\BookController as UserCiggyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,3 +25,10 @@ Route::get('/dashboard', function () {
 
 Route::resource('/ciggies', CiggyController::class)->middleware(['auth']);
 require __DIR__.'/auth.php';
+
+//this will create all the routes for ciggies
+//and the routes will only be avaliable when a user is logged in
+Route::resource('/admin/ciggies', AdminCiggyController::class)->middleware(['auth']) ->names ('admin.ciggies');
+
+Route::resource('/user/ciggies', UserCiggyController::class)->middleware(['auth'])->names('user.ciggies')->only(['index','show']);
+
