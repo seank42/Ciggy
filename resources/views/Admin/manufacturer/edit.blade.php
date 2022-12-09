@@ -13,36 +13,22 @@
                     @csrf
                     <x-text-input
                         type="text"
-                        name="brand"
-                        field="brand"
-                        placeholder="Brand"
+                        name="name"
+                        field="name"
+                        placeholder="name"
                         class="w-full"
                         autocomplete="off"
-                        :value="@old('brand')"></x-text-input>
+                        :value="@old('name', $manufacturer->name)"></x-text-input>
 
                     <x-text-input
                         type="text"
-                        name="type"
-                        field="type"
-                        placeholder="Type..."
+                        name="address"
+                        field="address"
+                        placeholder="address..."
                         class="w-full mt-6"
-                        :value="@old('type')"></x-text-input>
+                        :value="@old('address',$manufacturer->address)"></x-text-input>
 
-                    <x-textarea
-                        name="price"
-                        rows="10"
-                        field="price"
-                        placeholder="Price..."
-                        class="w-full mt-6"
-                        :value="@old('price')"></x-textarea>
 
-                    <x-text-input
-                        type="text"
-                        name="amount"
-                        field="Amount"
-                        placeholder="amount..."
-                        class="w-full mt-6"
-                        :value="@old('amount')"></x-text-input>
 
 
 

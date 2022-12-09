@@ -42,7 +42,11 @@ class ManufacturerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Manufacturer::create([
+            'name' =>  $request->name,
+            'address' =>  $request->address,
+        ]);
+        return to_route('admin.manufacturer.index');
     }
 
     /**
@@ -70,10 +74,24 @@ class ManufacturerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Manufacturer $manufacturer)
     {
-        //
-    }
+        $user = Auth::user();
+        $user->authorizeRoles('admin');
+        // $manufacturer = Manufacturer::all();
+
+        // This user id check below was implemented as part of LiteNote
+        // I don't have a user id linked to books,so I don't need it here - in CA 2 we will allow only admin users to edit books.
+        // if($book->user_id != Auth::id()) {
+        //     return abort(403);
+        // }
+
+      //  dd($book);
+
+        // Load the edit view which will display the edit form
+        // Pass in the current book so that it appears in the form.
+        return view('admin.manufacturer.edit')->with('manufacturer', $manufacturer);
+        }
 
     /**
      * Update the specified resource in storage.
@@ -82,9 +100,17 @@ class ManufacturerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Manufacturer $manufacturer)
     {
-        //
+        $user = Auth::user();
+        $user->authorizeRoles('admin');
+
+        $manufacturer->update([
+        'name' => $request->name,
+        'address' => $request->address,
+        ]);
+
+        return to_route('admin.manufacturer.show', $manufacturer)->with('success','manufacturer updated successfully');
     }
 
     /**
@@ -93,8 +119,10 @@ class ManufacturerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Manufacturer $manufacturer)
     {
-        //
+        $manufacturer->delete();
+
+        return to_route('admin.manufacturer.index')->with('success', 'manufacturer deleted successfully');
     }
 }
