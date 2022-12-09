@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Ciggy;
 use App\Models\Manufacturer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ManufacturerController extends Controller
 {
@@ -30,7 +31,7 @@ class ManufacturerController extends Controller
      */
     public function create()
     {
-        return view('admin.manufactures.create');
+        return view('admin.manufacturer.create');
     }
 
     /**
@@ -50,9 +51,17 @@ class ManufacturerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Manufacturer $manufacturer)
     {
-        //
+        $user = Auth::user();
+        $user->authorizeRoles('admin');
+
+        if(!Auth::id()) {
+           return abort(403);
+         }
+
+        //this function is used to get a Ciggy by the ID.
+        return view('admin.manufacturer.show')->with('manufacturer', $manufacturer);
     }
 
     /**

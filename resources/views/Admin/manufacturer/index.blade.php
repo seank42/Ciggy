@@ -13,7 +13,8 @@
                 @foreach ($manufacturers as $manufacturer)
                 <a href="{{ route('admin.manufacturer.show', $manufacturer) }}">
                 <div class="p-6 mt-6 bg-white border-b border-gray-200">
-                    {{$manufacturer->name}}
+                   <p> {{$manufacturer->name}}</p>
+                    {{$manufacturer->address}}
                 </div>
                 </a>
 
