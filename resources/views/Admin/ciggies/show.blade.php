@@ -14,11 +14,16 @@
                     </h2>
                     <p>{{$ciggy->type}}</p>
                     <p>{{$ciggy->price}}</p>
+
+                    <h1 class="text-xl font-bold mt-4">Manufacturer</h1>
+                    <p>{{$ciggy->manufacturer->name}}</p>
+                    <p>{{$ciggy->manufacturer->address}}</p>
+
                 </div>
   {{-- when edit button is clicked it rerotues to the edit page  --}}
-                <a href="{{ route('ciggies.edit', $ciggy) }}" class="btn-link btn-lg mb-2">Edit</a>
+                <a href="{{ route('admin.ciggies.edit', $ciggy) }}" class="btn-link btn-lg mb-2">Edit</a>
 
-                <form action="{{ route('ciggies.destroy', $ciggy) }}" method="post">
+                <form action="{{ route('admin.ciggies.destroy', $ciggy) }}" method="post">
                     @method('delete')
                     @csrf
     {{-- when delete  button is clicked it rerotues to the edit page  --}}
@@ -29,3 +34,5 @@
 
 
 </x-app-layout>
+
+

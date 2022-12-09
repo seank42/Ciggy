@@ -5,13 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ciggy extends Model
+class Manufacturer extends Model
 {
     use HasFactory;
-    protected $guarded =[];
+    protected $fillable = ['name', 'address'];
 
-    public function manufacturer()
+
+    public function ciggies()
     {
-        return $this->belongsTo(Manufacturer::class);
+        return $this->hasMany(Ciggy::class);
     }
 }
+

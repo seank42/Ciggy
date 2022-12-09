@@ -9,11 +9,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="overflow-hidden shadow-sm sm:rounded-lg">
                   {{-- when add ciggy  button is clicked it rerotues to ciggies create page  --}}
-                <a href="{{ route('ciggies.create') }}" class="btn-link btn-lg mb-2">Add a Ciggy</a>
-                @foreach ($ciggies as $ciggy)
-                <a href="{{ route('User.ciggies.show', $ciggy) }}">
+                <a href="{{ route('admin.manufacturer.create') }}" class="btn-link btn-lg mb-2">Add a manufacturer</a>
+                @foreach ($manufacturers as $manufacturer)
+                <a href="{{ route('admin.manufacturer.show', $manufacturer) }}">
                 <div class="p-6 mt-6 bg-white border-b border-gray-200">
-                    {{$ciggy->brand}}
+                    {{$manufacturer->name}}
                 </div>
                 </a>
 
@@ -21,9 +21,7 @@
 
 
     </div>
-      <!-- This line of code simply adds the links for Pagination-->
-      {{$ciggies->links()}}
-</div>
+        </div>
             </div>
 
 

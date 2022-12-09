@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Ciggy;
+use App\Models\Manufacturer;
 use Illuminate\Http\Request;
 
-class CiggyController extends Controller
+class ManufacturerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,12 +16,11 @@ class CiggyController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $user->authorizeRoles('admin');
-
-        $ciggies = Ciggy::paginate(10);
-
-        return view('Admin.ciggies.index')->with('ciggies', $ciggies);
+        {
+            //fetch 10 ciggies from the databse .
+            $manufactures = Manufacturer::paginate(10);
+            return view('admin.manufacturer.index')->with('manufacturers', $manufactures);
+        }
     }
 
     /**
@@ -30,11 +30,7 @@ class CiggyController extends Controller
      */
     public function create()
     {
-        $user = Auth::user();
-        $user->authorizeRoles('admin');
-
-
-    return view('Admin.ciggies.create');
+        return view('admin.manufactures.create');
     }
 
     /**
@@ -88,8 +84,8 @@ class CiggyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ciggy $ciggy)
+    public function destroy($id)
     {
-
+        //
     }
 }

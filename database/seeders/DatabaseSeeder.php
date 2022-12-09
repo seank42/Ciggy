@@ -23,8 +23,11 @@ class DatabaseSeeder extends Seeder
 
 
         // $this->call (CiggySeeder::class);
-        $this->call(CiggySeeder::class);
+        // $this->call(CiggySeeder::class);
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(ManufacturerSeeder::class);
+        // $this->call(EventSeeder::class);
+
     }
 }

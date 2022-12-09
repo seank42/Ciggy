@@ -1,12 +1,11 @@
 <?php
 
 namespace Database\Seeders;
-
-use App\Models\Ciggy;
+use App\Models\Manufacturer;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class CiggySeeder extends Seeder
+class ManufacturerSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +14,9 @@ class CiggySeeder extends Seeder
      */
     public function run()
     {
-        Ciggy::factory()->times(50)->create();
+        Manufacturer::factory()
+        ->times(4)
+        ->hasCiggies(20)
+        ->create();
     }
 }

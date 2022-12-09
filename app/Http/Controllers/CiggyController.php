@@ -52,7 +52,7 @@ class CiggyController extends Controller
             'brand' =>  $request->brand,
             'type' =>  $request->type,
             'price' =>  $request->price,
-            'amount' =>  $request->amount
+            'amount' =>  $request->amount,
         ]);
         return to_route('ciggies.index');
     }
@@ -65,10 +65,10 @@ class CiggyController extends Controller
      */
     public function show($id)
     {
-      //validation for show
-        // if(!Auth::id()) {
-           // return abort(403);
-        //  }
+      validation for show
+        if(!Auth::id()) {
+           return abort(403);
+         }
 
         $ciggy = Ciggy::findOrFail($id);
         return view('ciggies.show')->with('ciggy', $ciggy);

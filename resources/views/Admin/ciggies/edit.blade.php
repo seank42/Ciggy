@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="my-6 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
-                <form action="{{ route('ciggies.update', $ciggy) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('admin.ciggies.update', $ciggy) }}" method="post" enctype="multipart/form-data">
                     @method('put')
                     @csrf
                     <x-text-input
@@ -18,7 +18,7 @@
                         placeholder="Brand"
                         class="w-full"
                         autocomplete="off"
-                        :value="@old('brand')"></x-text-input>
+                        :value="@old('brand', $ciggy->brand)"></x-text-input>
 
                     <x-text-input
                         type="text"
@@ -26,7 +26,7 @@
                         field="type"
                         placeholder="Type..."
                         class="w-full mt-6"
-                        :value="@old('type')"></x-text-input>
+                        :value="@old('type', $ciggy->type)"></x-text-input>
 
                     <x-textarea
                         name="price"
@@ -34,7 +34,7 @@
                         field="price"
                         placeholder="Price..."
                         class="w-full mt-6"
-                        :value="@old('price')"></x-textarea>
+                        :value="@old('price', $ciggy->price)"></x-textarea>
 
                     <x-text-input
                         type="text"
@@ -42,8 +42,17 @@
                         field="Amount"
                         placeholder="amount..."
                         class="w-full mt-6"
-                        :value="@old('amount')"></x-text-input>
+                        :value="@old('amount', $ciggy->amount)"></x-text-input>
 
+                        <label for="manufacturer">Manufacturer</label>
+                        <select name="manufacturer_id">
+                            @foreach ($manufacturers as $manufacturer)
+                            <option value="{{$manufacturer->id}}" {{old('manufacturer_id') ? "selected" : ""}}>
+                            {{$manufacturer->name}}
+                            </option>
+                            @endforeach
+                        </select>
+                        <br />
 
 
                     <x-primary-button class="mt-6">Save Ciggy</x-primary-button>
